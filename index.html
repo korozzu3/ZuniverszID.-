@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zuniversz.id - JASTEB & UNCHECK</title>
+
+<style>
+
+:root{
+--primary:#6366f1;
+--secondary:#c084fc;
+--accent:#facc15;
+--dark:#0f172a;
+--card:#1e293b;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,system-ui;
+}
+
+body{
+background:linear-gradient(135deg,#0f172a,#020617);
+color:white;
+overflow-x:hidden;
+position:relative;
+}
+
+#particles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 5%;
+border-bottom:1px solid #334155;
+background:#020617cc;
+backdrop-filter:blur(10px);
+animation:fadeDown 1s ease;
+}
+
+.logo{
+font-size:20px;
+font-weight:700;
+color:#a78bfa;
+letter-spacing:1px;
+}
+
+.hero{
+padding:30px 20px;
+text-align:center;
+}
+
+.slider{
+max-width:1100px;
+margin:auto;
+overflow:hidden;
+border-radius:20px;
+position:relative;
+animation:zoomIn 1.2s ease;
+box-shadow:0 0 40px rgba(99,102,241,0.2);
+}
+
+.slides{
+display:flex;
+transition:transform .6s ease;
+}
+
+.slide{
+min-width:100%;
+}
+
+.slide img{
+width:100%;
+height:auto;
+object-fit:contain;
+border-radius:20px;
+}
+
+.arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:24px;
+padding:8px 12px;
+cursor:pointer;
+color:white;
+background:rgba(0,0,0,0.4);
+border-radius:50%;
+}
+
+.arrow.left{left:10px;}
+.arrow.right{right:10px;}
+
+.dots{
+text-align:center;
+margin-top:10px;
+}
+
+.dot{
+height:8px;
+width:8px;
+margin:4px;
+background:#475569;
+display:inline-block;
+border-radius:50%;
+}
+
+.dot.active{
+background:#a78bfa;
+}
+
+.hero h1{
+font-size:32px;
+margin-top:20px;
+background:linear-gradient(90deg,#818cf8,#c084fc,#f472b6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:fadeUp 1.2s ease;
+}
+
+.hero p{
+margin:10px 0 20px;
+color:#94a3b8;
+font-size:14px;
+animation:fadeUp 1.3s ease;
+}
+
+.btn{
+padding:12px 28px;
+border-radius:40px;
+background:linear-gradient(90deg,#6366f1,#a78bfa);
+text-decoration:none;
+color:white;
+font-weight:600;
+box-shadow:0 0 15px #6366f1;
+animation:fadeUp 1.4s ease;
+}
+
+.products{
+padding:40px 5%;
+}
+
+.section-title{
+text-align:center;
+font-size:26px;
+margin-bottom:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+}
+
+.card{
+background:linear-gradient(145deg,#1e293b,#020617);
+padding:22px 16px;
+border-radius:18px;
+text-align:center;
+border:1px solid #334155;
+transition:0.3s;
+display:flex;
+flex-direction:column;
+align-items:center;
+backdrop-filter:blur(12px);
+opacity:0;
+transform:translateY(40px);
+animation:fadeUp 0.8s ease forwards;
+}
+
+.card:nth-child(1){animation-delay:0.2s;}
+.card:nth-child(2){animation-delay:0.4s;}
+.card:nth-child(3){animation-delay:0.6s;}
+.card:nth-child(4){animation-delay:0.8s;}
+
+.card:hover{
+transform:translateY(-8px) scale(1.05);
+box-shadow:0 0 35px #6366f1;
+}
+
+.card img{
+width:95px;
+margin-bottom:14px;
+}
+
+.card-title{
+font-size:16px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.card-desc{
+font-size:13px;
+color:#94a3b8;
+margin-bottom:14px;
+}
+
+.price{
+font-size:18px;
+color:#facc15;
+font-weight:700;
+margin-bottom:12px;
+}
+
+.btn-buy{
+width:100%;
+padding:11px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#6366f1,#c084fc);
+color:white;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 0 10px #6366f1;
+}
+
+.btn-buy:hover{
+box-shadow:0 0 25px #a78bfa;
+transform:scale(1.05);
+}
+
+.testimoni{
+padding:40px 5%;
+}
+
+.modal{
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+align-items:center;
+justify-content:center;
+}
+
+.modal-content{
+background:#1e293b;
+padding:25px;
+border-radius:16px;
+text-align:center;
+max-width:350px;
+width:90%;
+position:relative;
+animation:zoomIn 0.5s ease;
+}
+
+.close-btn{
+position:absolute;
+right:15px;
+top:10px;
+font-size:22px;
+cursor:pointer;
+}
+
+.qr-image{
+width:190px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 0 20px #c084fc;
+}
+
+.modal-btn{
+padding:11px 22px;
+border:none;
+background:#6366f1;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+footer{
+text-align:center;
+padding:35px;
+border-top:1px solid #334155;
+color:#64748b;
+margin-top:40px;
+font-size:14px;
+}
+
+.shopee-popup{
+position:fixed;
+left:20px;
+bottom:20px;
+background:#1e293b;
+border-radius:12px;
+padding:12px 14px;
+display:flex;
+gap:10px;
+align-items:center;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+border:1px solid #334155;
+font-size:13px;
+animation:slidePopup .5s ease;
+z-index:999;
+max-width:260px;
+}
+
+.popup-icon{
+font-size:18px;
+}
+
+@keyframes slidePopup{
+from{transform:translateX(-30px);opacity:0;}
+to{transform:translateX(0);opacity:1;}
+}
+
+@keyframes fadeUp{
+0%{opacity:0;transform:translateY(40px);}
+100%{opacity:1;transform:translateY(0);}
+}
+
+@keyframes fadeDown{
+0%{opacity:0;transform:translateY(-30px);}
+100%{opacity:1;transform:translateY(0);}
+}
+
+@keyframes zoomIn{
+0%{opacity:0;transform:scale(0.9);}
+100%{opacity:1;transform:scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav>
+<div class="logo">Zuniversz.id</div>
+</nav>
+
+<section class="hero">
+
+<div class="slider">
+
+<div class="slides" id="slides">
+
+<div class="slide">
+<img src="banner1.png">
+</div>
+
+<div class="slide">
+<img src="banner2.png">
+</div>
+
+<div class="slide">
+<img src="banner3.png">
+</div>
+
+</div>
+
+<div class="arrow left" onclick="prevSlide()">❮</div>
+<div class="arrow right" onclick="nextSlide()">❯</div>
+
+</div>
+
+<div class="dots">
+<span class="dot active"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+
+<h1>Zuniversz.id</h1>
+<p>Paket Jasteb & Uncheck Premium
+Tempat beli Jasteb & Uncheck No.1 di Indonesia 🇮🇩 – cepat, aman, dan harga termurah!</p>
+
+<a href="#products" class="btn">Pilih Paket</a>
+
+<div style="margin-top:35px;color:#facc15;font-weight:600;">
+🔥 10.487 Paket Terjual
+</div>
+
+<div style="margin-top:8px;color:#eab308;font-size:14px;">
+⭐⭐⭐⭐⭐ 4.8/5 dari 1.854 pembeli
+</div>
+
+</section>
+
+<section class="products" id="products">
+
+<h2 class="section-title">Pilih Paket Anda</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="a.png">
+<div class="card-title">PAKET JASTEB/UNCHEK 5K</div>
+<div class="card-desc">KEUNTUNGAN: mendapatkan 25+ akun uncek</div>
+<div class="price">Rp 5.000</div>
+<button class="btn-buy" onclick="openModal('PAKET JASTEB/UNCHEK 5K','5.000')">Beli Sekarang</button>
+</div>
+
+<div class="card">
+<img src="b.png">
+<div class="card-title">PAKET JASTEB/UNCHEK 10K</div>
+<div class="card-desc">KEUNTUNGAN: mendapatkan 155+ akun uncek</div>
+<div class="price">Rp 10.000</div>
+<button class="btn-buy" onclick="openModal('PAKET JASTEB/UNCHEK 10K','10.000')">Beli Sekarang</button>
+</div>
+
+<div class="card">
+<img src="c.png">
+<div class="card-title">PAKET JASTEB/UNCHEK 20K</div>
+<div class="card-desc">KEUNTUNGAN: mendapatkan 499+ akun uncek</div>
+<div class="price">Rp 20.000</div>
+<button class="btn-buy" onclick="openModal('PAKET JASTEB/UNCHEK 20K','20.000')">Beli Sekarang</button>
+</div>
+
+<div class="card">
+<img src="d.png">
+<div class="card-title">PAKET MEMBERSIP MINGUAN VVIP 30K</div>
+<div class="card-desc">KEUNTUNGAN: mendapatkan uncek 24 jam seminggu</div>
+<div class="price">Rp 30.000</div>
+<button class="btn-buy" onclick="openModal('PAKET JASTEB/UNCHEK VVIP 30K','30.000')">Beli Sekarang</button>
+</div>
+
+</div>
+
+</section>
+
+<section class="testimoni">
+
+<h2 class="section-title">Testimoni Pembeli</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="card-desc">"Murah banget asli😋,unchek nya fresh lagi🔥."</div>
+<div class="price">- rashatyz</div>
+</div>
+
+<div class="card">
+<div class="card-desc">"Modal 10K gw dapet sg repper jir,mantap bang😹."</div>
+<div class="price">- Rakaa</div>
+</div>
+
+<div class="card">
+<div class="card-desc">"Gw beli yang 30k work it banget jir dpt unchek unli seminggu woila."</div>
+<div class="price">- Rizky</div>
+</div>
+
+<div class="card">
+<div class="card-desc">"Mantap bang,btw lain kali kasih bonus ya hehehe."</div>
+<div class="price">- Dika</div>
+</div>
+
+<div class="card">
+<div class="card-desc">"Admin kikir jir minta bonus,cuma di kasih 1,gpp sih amanah terus min."</div>
+<div class="price">- Bima</div>
+</div>
+
+</div>
+
+</section>
+
+<div id="qrisModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close-btn" onclick="closeModal()">×</span>
+
+<h3 id="modalTitle"></h3>
+
+<p>Scan QRIS All Payments untuk pembayaran</p>
+
+<div id="modalPrice"></div>
+
+<img src="iqr.png" class="qr-image">
+
+<p>Setelah transfer, kirim bukti ke WhatsApp Admin</p>
+
+<button class="modal-btn" onclick="sendWA()">
+Kirim Bukti ke WA
+</button>
+
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 Zuniversz.id. All Rights Reserved.</p>
+<p>Hubungi: @zuniversz.id</p>
+</footer>
+
+<div class="shopee-popup" id="orderPopup" style="display:none;">
+<div class="popup-icon">🛒</div>
+<div id="popupText"></div>
+</div>
+
+<script>
+
+/* SLIDER PREMIUM */
+
+let index = 0;
+let startX = 0;
+let endX = 0;
+let autoSlide;
+
+const slides = document.getElementById("slides");
+const dots = document.querySelectorAll(".dot");
+const slider = document.querySelector(".slider");
+
+function showSlide(){
+slides.style.transform="translateX(-"+index*100+"%)";
+
+dots.forEach(dot=>dot.classList.remove("active"));
+dots[index].classList.add("active");
+}
+
+function nextSlide(){
+index++;
+if(index > dots.length-1) index = 0;
+showSlide();
+}
+
+function prevSlide(){
+index--;
+if(index < 0) index = dots.length-1;
+showSlide();
+}
+
+/* AUTO SLIDE */
+
+function startAuto(){
+autoSlide = setInterval(nextSlide,4000);
+}
+
+function stopAuto(){
+clearInterval(autoSlide);
+}
+
+startAuto();
+
+/* SWIPE MOBILE */
+
+slider.addEventListener("touchstart",(e)=>{
+stopAuto();
+startX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchmove",(e)=>{
+endX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchend",()=>{
+
+let diff = startX - endX;
+
+if(Math.abs(diff) > 50){
+if(diff > 0){
+nextSlide();
+}else{
+prevSlide();
+}
+}
+
+startAuto();
+
+});
+
+/* DRAG DESKTOP */
+
+slider.addEventListener("mousedown",(e)=>{
+stopAuto();
+startX = e.clientX;
+});
+
+slider.addEventListener("mouseup",(e)=>{
+
+endX = e.clientX;
+
+let diff = startX - endX;
+
+if(Math.abs(diff) > 50){
+if(diff > 0){
+nextSlide();
+}else{
+prevSlide();
+}
+}
+
+startAuto();
+
+});
+
+/* MODAL + WA */
+
+let waText="";
+
+function openModal(paket,harga){
+
+document.getElementById("modalTitle").innerText=paket;
+document.getElementById("modalPrice").innerText="Rp "+harga;
+document.getElementById("qrisModal").style.display="flex";
+
+waText=
+"Halo min, saya sudah melakukan order.\n\n"+
+"Paket: "+paket+"\n"+
+"Harga: Rp "+harga+"\n\n"+
+"Berikut saya lampirkan bukti pembayarannya.\n"+
+"Mohon dicek dan diproses ya, terima kasih.";
+
+}
+
+function closeModal(){
+document.getElementById("qrisModal").style.display="none";
+}
+
+function sendWA(){
+const url="https://wa.me/6287898540527?text="+encodeURIComponent(waText);
+window.open(url);
+}
+
+/* PARTICLES */
+
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2,
+speedY:Math.random()*0.5
+});
+}
+
+function animateParticles(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#6366f1";
+
+particles.forEach(p=>{
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fill();
+
+p.y+=p.speedY;
+
+if(p.y>canvas.height){
+p.y=0;
+p.x=Math.random()*canvas.width;
+}
+
+});
+
+requestAnimationFrame(animateParticles);
+
+}
+
+animateParticles();
+
+/* POPUP ORDER */
+
+const names=[
+"Rizko","Diko","Raka","Bims","Aldi","Fajar","Yoga","Ilhaa","Rendy","Daffa","Rafi","Fikri","Arga","Zaki","Rian","Bagas","Rizal","Rama","Yusuf","Farhan",
+"Aditya","Andi","Bayu","Doni","Eko","Fahri","Galih","Hafiz","Irfan","Joko",
+"Krisna","Lukman","Miko","Nanda","Oki","Putra","Qori","Reza","Sandi","Tegar",
+"Umar","Vino","Wahyu","Yogi","Zidan","Asep","Bintang","Cahyo","Damar","Evan",
+"Fauzan","Gilang","Hendra","Indra","Jefri","Kevin","Lutfi","Maulana","Naufal","Omar",
+"Pratama","Rifki","Saputra","Taufik","Udin","Vicky","Wira","Yudha","Zulfikar","Abdul",
+"Bram","Candra","Dede","Erwin","Firman","Guntur","Hadi","Iqbal","Jamal","Kamal",
+"Luthfi","Miftah","Nizar","Ozan","Pandu","Qomar","Rendy","Sultan","Tomi","Ucup",
+"Varel","Wawan","Yasin","Zaky","Ari","Beni","Ciko","Doni","Ega","Fandi"
+];
+
+const cities=[
+"Jakarta","Bandung","Surabaya","Medan","Makassar","Semarang","Yogyakarta","Bekasi","Tangerang","Depok",
+"Bogor","Malang","Solo","Balikpapan","Samarinda","Banjarmasin","Pontianak","Palembang","Pekanbaru","Padang",
+"Banda Aceh","Lampung","Batam","Manado","Kendari","Palu","Ambon","Jayapura","Kupang","Mataram",
+"Denpasar","Cirebon","Tasikmalaya","Garut","Purwokerto","Magelang","Salatiga","Tegal","Kudus","Jepara",
+"Pati","Blora","Ngawi","Madiun","Kediri","Jombang","Lamongan","Gresik","Pasuruan","Probolinggo",
+"Situbondo","Banyuwangi","Jember","Lumajang","Bondowoso","Sidoarjo","Karawang","Subang","Indramayu","Majalengka",
+"Kuningan","Sukabumi","Cianjur","Serang","Pandeglang","Lebak","Cilegon","Cimahi","Banjar","Parepare",
+"Bitung","Tomohon","Gorontalo","Ternate","Tidore","Sorong","Merauke","Biak","Timika","Nabire",
+"Bengkulu","Jambi","Prabumulih","Lubuklinggau","Pagar Alam","Singkawang","Tarakan","Tanjungpinang","Langsa","Lhokseumawe"
+];
+
+const products=[
+"PAKET JASTEB/UNCHEK 5K",
+"PAKET JASTEB/UNCHEK 10K",
+"PAKET JASTEB/UNCHEK 20K",
+"PAKET MEMBERSHIP VVIP 30K"
+];
+
+function randomTime(){
+const times=["baru saja","1 menit yang lalu","2 menit yang lalu","3 menit yang lalu"];
+return times[Math.floor(Math.random()*times.length)];
+}
+
+function showOrderPopup(){
+
+const popup=document.getElementById("orderPopup");
+const text=document.getElementById("popupText");
+
+const name=names[Math.floor(Math.random()*names.length)];
+const city=cities[Math.floor(Math.random()*cities.length)];
+const product=products[Math.floor(Math.random()*products.length)];
+
+const shortName=name.charAt(0)+"***"+name.charAt(name.length-1);
+
+text.innerHTML=
+"<b>"+shortName+"</b> dari "+city+"<br>"+
+"membeli "+product+"<br>"+
+"<small>"+randomTime()+"</small>";
+
+popup.style.display="flex";
+
+setTimeout(()=>{
+popup.style.display="none";
+},5000);
+
+}
+
+function popupLoop(){
+const delay=Math.floor(Math.random()*7000)+5000;
+setTimeout(()=>{
+showOrderPopup();
+popupLoop();
+},delay);
+}
+
+popupLoop();
+
+</script>
+
+</body>
+</html>
